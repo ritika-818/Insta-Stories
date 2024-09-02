@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.stories-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.stories-container .story-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 3px solid rgb(243, 93, 118);
+  cursor: pointer;
+}
+.stories-container .story-name {
+  width: 50px;
+  margin-left: 10px;
+}
+
+.video-container .video {
+  width: 200px;
+  height: 400px;
+}/*# sourceMappingURL=style.css.map */
