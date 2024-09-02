@@ -94,7 +94,7 @@ body {
   width: 50%;
   gap: 10px;
   position: relative;
-  overflow-x: scroll;
+  overflow: hidden;
 }
 
 .side-stories::-webkit-scrollbar {

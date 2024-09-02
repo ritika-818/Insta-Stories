@@ -1,13 +1,12 @@
 const story = document.getElementsByClassName("stories-container")[0];
 story.addEventListener("click", displayStory);
-const videoDisplayContainer = document.getElementsByClassName(
-  "video-display-container"
-)[0];
+const videoDisplayContainer = document.getElementsByClassName("video-display-container")[0];
 const leftStories = document.getElementsByClassName("left-stories")[0];
 const rightStories = document.getElementsByClassName("right-stories")[0];
 const forwardArrow = document.getElementsByClassName("forward-arrow")[0];
 const backwardArrow = document.getElementsByClassName("backward-arrow")[0];
 let storyId = "0";
+
 forwardArrow.addEventListener("click", () => {
   story.scrollBy({
     top: 0,
@@ -37,56 +36,80 @@ const arr = [
 ];
 
 function displayStory(e) {
-  videoDisplayContainer.style.backgroundColor = "black";
- storyId = e.target.id;
-  console.log(storyId);
+  storyId = parseInt(e.target.id); 
   videoDisplayContainer.style.display = "flex";
-  story.style.display = "none";
+  story.style.display = "none"; 
 
   const videoContainer = document.getElementsByClassName("video-container")[0];
   videoContainer.innerHTML = "";
 
+  videoDisplayContainer.style.background = "black";
+
+  createVideo(arr[storyId], videoContainer);
+
+  setupSideVideos();
+}
+
+function setupSideVideos() {
+  leftStories.innerHTML = ""; 
+  rightStories.innerHTML = ""; 
+
+  for (let i = storyId - 1; i >= 0; i--) {
+    const videoElement = createSideVideo(arr[i]);
+    leftStories.appendChild(videoElement);
+
+    videoElement.addEventListener("click", () => showVideo(i));
+  }
+
+  for (let i = storyId + 1; i < arr.length; i++) {
+    const videoElement = createSideVideo(arr[i]);
+    rightStories.appendChild(videoElement);
+
+    videoElement.addEventListener("click", () => showVideo(i));
+  }
+}
+
+function createSideVideo(videoSrc) {
+  const video = document.createElement("video");
+  video.classList.add("side-video");
+  video.setAttribute("height", "100");
+  video.setAttribute("muted", "true"); 
+  video.setAttribute("autoplay", "true");
+  video.setAttribute("loop", "true");
+
+  const source = document.createElement("source");
+  source.setAttribute("src", videoSrc);
+  source.setAttribute("type", "video/mp4");
+  video.appendChild(source);
+
+  return video;
+}
+
+function showVideo(newStoryId) {
+  if (newStoryId >= 0 && newStoryId < arr.length) {
+    storyId = newStoryId;
+    const videoContainer = document.getElementsByClassName("video-container")[0];
+    videoContainer.innerHTML = "";
+    createVideo(arr[storyId], videoContainer);
+
+    setupSideVideos();
+  }
+}
+
+function createVideo(videoSrc, container) {
   const video = document.createElement("video");
   video.classList.add("video");
   video.setAttribute("height", "600");
   video.setAttribute("controls", "true");
-  const cross = document.createElement("div");
-  cross.classList.add("cross-icon");
-  videoContainer.appendChild(cross);
+
   const source = document.createElement("source");
-  source.setAttribute(
-    "src",arr[storyId]
-  );
+  source.setAttribute("src", videoSrc);
   source.setAttribute("type", "video/mp4");
   video.appendChild(source);
 
-  videoContainer.appendChild(video);
+  const cross = document.createElement("div");
+  cross.classList.add("cross-icon");
 
-  const leftVideos = leftStories.querySelectorAll("video");
-  const rightVideos = rightStories.querySelectorAll("video");
-
-  leftVideos.forEach((video) => {
-    video.addEventListener("click", () => swapVideos(video));
-  });
-
-  rightVideos.forEach((video) => {
-    video.addEventListener("click", () => swapVideos(video));
-  });
-}
-
-function swapVideos(clickedVideo) {
-  const videoContainer = document.getElementsByClassName("video-container")[0];
-  const currentMainVideo = videoContainer.querySelector("video");
-
-  const tempSource = clickedVideo.querySelector("source").getAttribute("src");
-  clickedVideo
-    .querySelector("source")
-    .setAttribute(
-      "src",
-      currentMainVideo.querySelector("source").getAttribute("src")
-    );
-  currentMainVideo.querySelector("source").setAttribute("src", tempSource);
-
-  clickedVideo.load();
-  currentMainVideo.load();
+  container.appendChild(cross);
+  container.appendChild(video);
 }
