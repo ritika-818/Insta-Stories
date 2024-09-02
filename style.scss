@@ -1,3 +1,126 @@
-@import "./scss/global";
-@import "./scss/story";
-@import "./scss/video";
+@mixin arrow-style($top, $left) {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: $top;
+    left: $left;
+  }
+  
+  @mixin story-style {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border: 2px solid #ff3366;
+  }
+  
+  @mixin video-style($width, $height) {
+    width: $width;
+    height: $height;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    position: absolute;
+    z-index: 1000;
+  }
+  
+  body {
+    /* background-color: #121212; */
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .forward-arrow {
+    @include arrow-style(45px, 850px);
+  }
+  
+  .backward-arrow {
+    @include arrow-style(45px, 350px);
+  }
+  
+  .stories-container {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    overflow-x: scroll;
+    background-color: grey;
+    margin-left: 350px;
+    border-radius: 10px;
+  }
+  
+  .stories-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .story {
+    margin: 0 10px;
+    text-align: center;
+  }
+  
+  .story-img {
+    @include story-style;
+  }
+  
+  .video-display-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .video-container {
+    @include video-style(370px, 540px);
+    margin-left: 25px;
+  }
+  
+  .cross-icon {
+    position: absolute;
+    z-index: 2000;
+  }
+  
+  .side-stories {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    width: 50%;
+    gap: 10px;
+    position: relative;
+    overflow-x: scroll;
+  }
+  
+  .side-stories::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .side-stories video {
+    background-color: black;
+    opacity: 0.3;
+    object-fit: cover;
+    height: 400px;
+    width: 250px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .left-stories {
+    position: relative;
+    left: -130px;
+  }
+  
+  .right-stories {
+    position: relative;
+    right: -130px;
+  }
+  
