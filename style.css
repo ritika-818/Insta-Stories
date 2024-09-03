@@ -55,6 +55,8 @@ body {
   height: 60px;
   cursor: pointer;
   border: 2px solid #ff3366;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .video-display-container {
@@ -84,6 +86,14 @@ body {
 .cross-icon {
   position: absolute;
   z-index: 2000;
+  color: grey;
+  cursor: pointer;
+  scale: 2;
+  right: 10px;
+  top: 20px;
+}
+.cross-icon :hover {
+  color: white;
 }
 
 .side-stories {

@@ -17,6 +17,7 @@
     height: 60px;
     cursor: pointer;
     border: 2px solid #ff3366;
+    object-fit: cover;
   }
   
   @mixin video-style($width, $height) {
@@ -87,6 +88,14 @@
   .cross-icon {
     position: absolute;
     z-index: 2000;
+    color: grey;
+    cursor: pointer;
+    scale: 2;
+    right:10px;
+    top:20px;
+    :hover{
+        color: white;
+    }
   }
   
   .side-stories {
