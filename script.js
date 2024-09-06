@@ -88,7 +88,6 @@ function setupSideVideos() {
 function createSideVideo(videoSrc) {
   const video = document.createElement("video");
   video.classList.add("side-video");
-  video.setAttribute("width", "500");
   const source = document.createElement("source");
   source.setAttribute("src", videoSrc);
   source.setAttribute("type", "video/mp4");
